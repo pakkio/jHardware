@@ -145,9 +145,9 @@ public final class WindowsDisplayInfo extends AbstractDisplayInfo {
             }
         }
 
-        supportedResolutions.stream().forEach((supportedResolution) -> {
+        for(String supportedResolution: supportedResolutions) {
             allSupportedResolutions.append(supportedResolution).append(";");
-        });
+        }
 
         displayDataMap.put("available_res_0", allSupportedResolutions.toString());
     }

@@ -129,9 +129,9 @@ public class HardwareInfo {
         System.out.println("Vendor Id: " + info.getVendorId());
         
         Set<Map.Entry<String, String>> fullInfos = info.getFullInfo().entrySet();
-        
-        fullInfos.stream().forEach((fullInfo) -> {
+
+        for(Map.Entry<String, String> fullInfo: fullInfos) {
             System.out.println(fullInfo.getKey() + ": " + fullInfo.getValue());
-        });
+        }
     }
 }

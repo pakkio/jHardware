@@ -20,7 +20,7 @@ import org.jutils.jhardware.model.ComponentInfo;
  * 
  * @author Javier Garcia Alonso
  */
-@FunctionalInterface
+//@FunctionalInterface
 public interface HardwareInfo {    
     ComponentInfo getInfo();    
 }

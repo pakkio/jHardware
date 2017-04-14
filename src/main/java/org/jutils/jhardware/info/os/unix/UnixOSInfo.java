@@ -16,12 +16,9 @@ package org.jutils.jhardware.info.os.unix;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.stream.Stream;
+import java.util.*;
+
+import com.google.common.collect.FluentIterable;
 import org.jutils.jhardware.info.os.AbstractOSInfo;
 import org.jutils.jhardware.util.HardwareInfoUtils;
 
@@ -52,12 +49,12 @@ public final class UnixOSInfo extends AbstractOSInfo {
     }
 
     private static String getOSReleaseData() {
-        Stream<String> streamProcessorInfo = HardwareInfoUtils.readFile(OS_RELEASE);
+        List<String> streamProcessorInfo = HardwareInfoUtils.readFile(OS_RELEASE);
         final StringBuilder buffer = new StringBuilder();
 
-        streamProcessorInfo.forEach((String line) -> 
-            buffer.append(line).append("\r\n")
-        );
+        for(String line: streamProcessorInfo) {
+            buffer.append(line).append("\r\n");
+        }
 
         return buffer.toString();
     }

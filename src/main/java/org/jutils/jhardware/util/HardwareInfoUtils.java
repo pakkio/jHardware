@@ -16,14 +16,15 @@ package org.jutils.jhardware.util;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 /**
  *
@@ -40,12 +41,12 @@ public class HardwareInfoUtils {
 
     }
 
-    public static Stream<String> readFile(String filePath) {
+    public static List<String> readFile(String filePath) {
         Path path = Paths.get(filePath);
 
-        Stream<String> fileLines = null;
+        List<String> fileLines = null;
         try {
-            fileLines = Files.lines(path);
+            fileLines = Files.readAllLines(path, Charset.defaultCharset());
         } catch (IOException ex) {
             Logger.getLogger(HardwareInfoUtils.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -54,9 +55,9 @@ public class HardwareInfoUtils {
     }
     
     public static String getSingleValueFromFile(String filePath) {
-        Stream<String> streamProcessorInfo = readFile(filePath);
+        List<String> streamProcessorInfo = readFile(filePath);
 
-        return streamProcessorInfo.findFirst().get();
+        return streamProcessorInfo.get(0);
     }
 
     public static String executeCommand(String... command) {
